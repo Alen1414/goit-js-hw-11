@@ -21,16 +21,18 @@ refs.searchForm.addEventListener('submit', onSearch);
 
 function onSearch(e) {
     e.preventDeafult();
-    const query =e.currentTarget.element.searchQuery.value;
+    const query = e.currentTarget.elements.query.value;
     console.log(query)
-    // const serchQuuery = refs.searchForm.element.q.value;
-    // console.log(serchQuuery);
-     const SEARCH_URL = `https://pixabay.com/api/?key=`;
-    const API_KEY = '25348834-538d9f4405bc5a9c16273efde';
-    const OPTIONS = `&q=${query}&image_type=photo&page=5&per_page=40`;
+    // const s = query.searchQuery.value;
+    // console.log(s)
 
-    return fetch(`${SEARCH_URL}${API_KEY}${OPTIONS}`)
-        .then(r => r.json())
-       .then(console.log);
+    //  const SEARCH_URL = `https://pixabay.com/api/?key=`;
+    // const API_KEY = '25348834-538d9f4405bc5a9c16273efde';
+    // const OPTIONS = `&q=yellow+flowers&image_type=photo&page=5&per_page=40`;
+
+    return fetch(`https://pixabay.com/api/?key=25348834-538d9f4405bc5a9c16273efde&q=${query}&image_type=photo`)
+    .then(r => r.json())
+    .then(console.log)
 };
 
+onSearch()
