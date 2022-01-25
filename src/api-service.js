@@ -1,13 +1,13 @@
 
         import axios from 'axios';
-export default class APIservice{
+export default class NewsApiServise{
     constructor () {
         this.searchQuery = "";
         this.page = 1;
         
   }
     
-    async APIservice() {
+    async apiService() {
         const axios = require('axios').default;
        
         const options = {
@@ -28,7 +28,7 @@ export default class APIservice{
         const search = await axios(options);
         this.page += 1;
      
-        return search.data.hits
+        return search.data.articles 
         // .then(data => {
                 
         //     return data.hits;
