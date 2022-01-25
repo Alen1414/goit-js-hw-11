@@ -32,8 +32,8 @@ function onSearch(e) {
     e.preventDeafult();
 
     clearArticlesContainer();
-     apiService.query = e.currentTarget.elements.query.value;
-    console.log(query)
+     apiService.searchQuery = e.currentTarget.elements.query.value;
+    console.log(searchQuery)
     apiService.resetPage()
     apiService.fetchArticles().then(appenArticlesMarkup)
 };
