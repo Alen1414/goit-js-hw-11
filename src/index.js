@@ -1,8 +1,8 @@
 import './index.html';
-import imageCard from './image_card.hbs';
+// import imageCard from './image_card.hbs';
 import Notiflix from 'notiflix';
-import APIservice from './api-service';
-import articles from './articles.hbs';
+import ApiServise from './api-service';
+// import articles from './articles.hbs';
 import markup from './image_card.hbs';
 
 import axios from "axios";
@@ -20,7 +20,7 @@ const refs = {
     imageCard: document.querySelector(".gallery")
 };
 
-const apiService = new APIservice()
+const apiService = new ApiServise()
 console.log(apiService)
 
 refs.searchForm.addEventListener('submit', onSearch);
@@ -29,11 +29,11 @@ refs.loadMore.addEventListener('click', onloadMore);
 
 
 function onSearch(e) {
-    e.preventDeafult();
+    e.preventDefault();
 
     clearArticlesContainer();
-     apiService.searchQuery = e.currentTarget.elements.query.value;
-    console.log(searchQuery)
+    apiService.query = e.currentTarget.elements.query.value;
+    // console.log(query)
     apiService.resetPage()
     apiService.fetchArticles().then(appenArticlesMarkup)
 };
@@ -44,8 +44,11 @@ function onloadMore() {
     apiService.fetchArticles().then(appenArticlesMarkup)
 }
 
-function appenArticlesMarkup(articles) {
-    refs.imageCard.insertAdjacentHTML("beforeend", markup(articles));
+function appenArticlesMarkup(hits) {
+    // const image = hits.map(element => {return markup(element);}).join('');
+    // refs.imageCard.insertAdjacentHTML("beforeend",image) ;
+    // console.log(image);
+    refs.imageCard.insertAdjacentHTML("beforeend", markup(hits));
 }
 
 function clearArticlesContainer() {
