@@ -1,8 +1,8 @@
 import './index.html';
-// import imageCard from './image_card.hbs';
+
 import Notiflix from 'notiflix';
 import ApiServise from './api-service';
-// import articles from './articles.hbs';
+
 import markup from './image_card.hbs';
 
 import axios from "axios";
@@ -31,14 +31,15 @@ refs.loadMore.addEventListener('click', onloadMore);
 // console.log(refs.loadMore)
 
 
-function onSearch(e) {
+async function onSearch(e) {
     e.preventDefault();
 
     clearArticlesContainer();
     apiService.query = e.currentTarget.elements.query.value;
     // console.log(query)
     apiService.resetPage()
-    apiService.fetchArticles().then(appenArticlesMarkup)
+    const hits = await apiService.fetchArticles()
+    appenArticlesMarkup(hits);
 };
 
 
@@ -48,12 +49,14 @@ function onloadMore() {
 }
 
 function appenArticlesMarkup(hits) {
-    const image = hits.map(element => {return markup(element);}).join('');
-    refs.imageCard.insertAdjacentHTML("beforeend", image);
-    console.log(image);
-    // refs.imageCard.insertAdjacentHTML("beforeend", markup(hits));
+    // const image = hits.map(element => {return markup(element);}).join('');
+    // refs.imageCard.insertAdjacentHTML("beforeend", image);
+    // console.log(image);
+    const code =hits.map(element => {return markup(element);}).join('');
+    console.log(hits)
+    refs.imageCard.insertAdjacentHTML('beforeend', code);
 }
 
 function clearArticlesContainer() {
-    refs.imageCard.insertAdjacentHTML=''
+    refs.imageCard.innerHTML='';
 }
