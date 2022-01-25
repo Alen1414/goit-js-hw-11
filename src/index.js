@@ -15,9 +15,9 @@ import axios from "axios";
 
 
 const refs = {
-    searchForm: document.querySelector('.search-form'),
-imageCard: document.querySelector('.gallery'),
-  loadMore: document.querySelector('.load-more'),
+    searchForm: document.querySelector(".search-form"),
+    loadMore: document.querySelector(".load-more"),
+    imageCard: document.querySelector(".gallery")
 };
 
 const apiService = new APIservice()
@@ -25,6 +25,7 @@ console.log(apiService)
 
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMore.addEventListener('click', onloadMore);
+// console.log(refs.loadMore)
 
 
 function onSearch(e) {
@@ -32,7 +33,7 @@ function onSearch(e) {
 
     clearArticlesContainer();
      apiService.query = e.currentTarget.elements.query.value;
-    // console.log(searchQuery )
+    console.log(query)
     apiService.resetPage()
     apiService.fetchArticles().then(appenArticlesMarkup)
 };

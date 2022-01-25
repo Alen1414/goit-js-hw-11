@@ -1,13 +1,13 @@
 
         import axios from 'axios';
-export default class NewsApiServise{
+export default class APIservice{
     constructor () {
         this.searchQuery = "";
         this.page = 1;
         
   }
     
-    async fetchArticles() {
+    async APIservice() {
         const axios = require('axios').default;
        
         const options = {
