@@ -10,29 +10,31 @@ import axios from "axios";
 //   });
 
 
-const apiService = new APIservice()
-console.log(apiService )
+
+
 const refs = {
     searchForm: document.querySelector('.search-form'),
-    imageCard: document.querySelector('.gallery'),
-  loadMore: document.querySelector('[data-action="load-more]'),
+imageCard: document.querySelector('.gallery'),
+  loadMore: document.querySelector('.load-more'),
 };
-let searchQuery = '';
-console.log(refs.form);
+
+const apiService = new APIservice()
+console.log(apiService)
+
 refs.searchForm.addEventListener('submit', onSearch);
-// refs.loadMore.addEventListener('click',onLoadMore );
+refs.loadMore.addEventListener('click', onloadMore);
+
 
 function onSearch(e) {
     e.preventDeafult();
-    searchQuery = e.currentTarget.elements.query.value;
-    console.log(searchQuery )
-    // const s = query.searchQuery.value;
-    // console.log()
-    apiService.fetchArticles(searchQuery)
+     apiService.searchQuery = e.currentTarget.elements.query.value;
+    // console.log(searchQuery )
+    apiService.resetPage()
+    apiService.fetchArticles()
 };
 
 
 
-function onLoadMore() {
-    apiService.fetchArticles(searchQuery)
+function onloadMore() {
+    apiService.fetchArticles()
 }
