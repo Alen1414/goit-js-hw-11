@@ -86,6 +86,14 @@ body {
     margin-bottom: 50px;
     /* // background: #e6f3e9; */
   }
+  button .is-hidden {
+    display: none;
+  }
+  .is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
   .info-item {
     margin: 0;
   }
