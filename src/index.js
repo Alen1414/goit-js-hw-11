@@ -1,5 +1,5 @@
 import './index.html';
-
+import './style.css';
 import Notiflix from 'notiflix';
 import ApiServise from './api-service';
 
