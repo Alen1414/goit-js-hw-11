@@ -51,11 +51,20 @@ async function onSearch(e) {
         Notify.failure(`Sorry, there are no images matching your search query. Please try again.`)
         return 
     }
-    
+     
+
     Notify.success(`Hooray! We found ${data.totalHits} images.`);
     appenArticlesMarkup(data.hits);
+     if (data.totalHits <= apiService.totalImage) {
+   Notify.failure("We're sorry, but you've reached the end of search results."); 
+        disable()
+        return
+    }
+
     
     enable();
+
+
     // appenArticlesMarkup(object.its);
 
 
@@ -64,8 +73,16 @@ async function onSearch(e) {
 // e.currentTarget.elements.query.value = "";
  };
 
-function onloadMore() {
-    apiService.fetchArticles().then(appenArticlesMarkup)
+async function onloadMore() {
+    const load = await apiService.fetchArticles();
+
+    if (load.totalHits <= apiService.totalImage) {
+   Notify.failure("We're sorry, but you've reached the end of search results."); 
+        disable()
+        return
+    }
+    appenArticlesMarkup(load.hits)
+    
 }
 
 function appenArticlesMarkup(hits) {

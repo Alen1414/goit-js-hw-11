@@ -4,8 +4,9 @@ export default class ApiServise{
     constructor () {
         this.searchQuery = "";
         this.page = 1;
-        
-  }
+        this.totalImage = 0;
+    }
+   
     
     async fetchArticles() {
         const axios = require('axios').default;
@@ -27,13 +28,16 @@ export default class ApiServise{
         };
         const search = await axios(options);
         this.page += 1;
-     
+      this.imagesOnPage()
         return search.data;
 
         // const its = search.data.hits;
         // const totalHits = search.data.totalHits;
 
         // return { its, totalHits }; 
+    }
+    imagesOnPage() {
+        this.totalImage = this.page * 40;
     }
     resetPage() {
         this.page = 1;
