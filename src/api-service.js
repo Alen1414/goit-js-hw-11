@@ -28,12 +28,12 @@ export default class ApiServise{
         const search = await axios(options);
         this.page += 1;
      
-        // return search.data.hits
+        return search.data;
 
-        const its = search.data.hits;
-        const totalHits = search.data.totalHits;
+        // const its = search.data.hits;
+        // const totalHits = search.data.totalHits;
 
-        return { its, totalHits }; 
+        // return { its, totalHits }; 
     }
     resetPage() {
         this.page = 1;

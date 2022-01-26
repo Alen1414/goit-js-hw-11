@@ -30,10 +30,11 @@ refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMore.addEventListener('click', onloadMore);
 // console.log(refs.loadMore)
 
-
+disable() 
 async function onSearch(e) {
+  
     e.preventDefault();
-    disable();
+    
     // clearArticlesContainer();
     // apiService.query = e.currentTarget.elements.query.value;
     // apiService.resetPage();
@@ -41,21 +42,27 @@ async function onSearch(e) {
     apiService.query = e.currentTarget.elements.query.value;
     // console.log(query)
     apiService.resetPage()
-    const hits = await apiService.fetchArticles()
-    appenArticlesMarkup(hits);
+    const data = await apiService.fetchArticles()
+    
 
 
 
-apiService.fetchArticles()
-.then(object => {Notify.success(`Hooray! We found ${object.totalHits} images.`);
+    if (data.totalHits === 0) {
+        Notify.failure(`Sorry, there are no images matching your search query. Please try again.`)
+        return 
+    }
+    
+    Notify.success(`Hooray! We found ${data.totalHits} images.`);
+    appenArticlesMarkup(data.hits);
+    
     enable();
-    appenArticlesMarkup(object.its);
-})
-.catch(error => {
-    Notify.failure(`Sorry, there are no images matching your search query. Please try again.`);
-});
-e.currentTarget.elements.query.value = "";
-};
+    // appenArticlesMarkup(object.its);
+
+
+//     ;
+// });
+// e.currentTarget.elements.query.value = "";
+ };
 
 function onloadMore() {
     apiService.fetchArticles().then(appenArticlesMarkup)
